@@ -68,13 +68,19 @@ const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(
           <ArkDialog.Content
             ref={ref}
             className={cn(
-              "relative max-h-[calc(100dvh-1rem)] w-full overflow-y-auto rounded-t-xl border border-surface-border bg-raised p-inset shadow-lg outline-hidden sm:max-w-lg sm:rounded-xl",
+              // El panel no hace scroll: lo hace el contenedor interno, con el
+              // relleno dentro. Así la barra queda a un lado del contenido y no
+              // pegada a la esquina redondeada, donde se veía como un borde
+              // cuadrado. El botón de cierre queda fijo en la esquina.
+              "relative flex max-h-[calc(100dvh-1rem)] w-full flex-col overflow-hidden rounded-t-xl border border-surface-border bg-raised shadow-lg outline-hidden sm:max-w-lg sm:rounded-xl",
               elevationRing,
               dialogContentAnimation,
               className,
             )}
           >
-            {children}
+            <div className="min-h-0 flex-1 overflow-y-auto p-inset [scrollbar-gutter:stable] [scrollbar-width:thin]">
+              {children}
+            </div>
             {hideCloseButton ? null : (
               <ArkDialog.CloseTrigger
                 className={cn(

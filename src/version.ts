@@ -13,7 +13,7 @@ export interface LibraryRelease {
 }
 
 /** Versión compilada del paquete. Debe coincidir con `package.json`. */
-export const UI_LIBRARY_VERSION = "1.7.2";
+export const UI_LIBRARY_VERSION = "1.7.3";
 
 /**
  * Notas de migración de la 1.0.0 (#150), ya escritas y listas — pendientes
@@ -39,6 +39,14 @@ export const UI_LIBRARY_RELEASES: readonly LibraryRelease[] = [
   {
     version: UI_LIBRARY_VERSION,
     channel: "current",
+    migration: [
+      "Solo corrige: subir no requiere cambios de código. El Dialog hace scroll dentro de su relleno, con la barra separada de la esquina redondeada; si tu app ponía overflow-y-auto en el diálogo, ya sobra.",
+    ],
+  },
+  {
+    version: "1.7.2",
+    channel: "maintenance",
+    publishedAt: "2026-10-14",
     migration: [
       "Solo corrige: subir no requiere cambios de código. Remate de la 1.7.1: la lista de columnas de «Personalizar tabla» hace scroll dentro del panel acotado, así los interruptores de abajo vuelven a alcanzarse (#224).",
     ],

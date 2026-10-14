@@ -33,6 +33,12 @@ arreglos es un cambio incompatible: subir es seguro.
   desde **1.6.0** (#217). Si ocultabas la navegación en ese rango con un
   breakpoint propio, quítalo: ahora colapsa solo cuando el contenido no cabe.
 
+## [1.7.3] - 2026-10-14
+
+### Fixed
+
+- **`Dialog`: la barra de scroll iba pegada a la esquina redondeada del panel y se veía como un borde cuadrado.** El scroll ya no lo hace el panel sino un contenedor interno que lleva el relleno: la barra (fina, con hueco estable) queda a un lado del contenido y el botón de cierre fijo en la esquina. Las apps que ponían `overflow-y-auto` en el diálogo pueden quitarlo; `max-h-*` sigue valiendo.
+
 ## [1.7.2] - 2026-10-14
 
 ### Fixed
