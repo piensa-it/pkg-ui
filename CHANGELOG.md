@@ -33,6 +33,12 @@ arreglos es un cambio incompatible: subir es seguro.
   desde **1.6.0** (#217). Si ocultabas la navegación en ese rango con un
   breakpoint propio, quítalo: ahora colapsa solo cuando el contenido no cabe.
 
+## [Sin publicar]
+
+### Fixed
+
+- **`DataTable`: la lista de columnas de «Personalizar tabla» no hacía scroll cuando el panel se acotaba a la pantalla (#224).** El contenido del popover no heredaba `--available-height` del posicionador, crecía más que la ventana y los interruptores de abajo quedaban fuera del alcance. Remate de la 1.7.1.
+
 ## [1.7.1] - 2026-10-14
 
 ### Fixed

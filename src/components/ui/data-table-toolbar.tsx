@@ -194,7 +194,11 @@ export function DataTableToolbar<TValue extends DataTableValue>({
                 <Settings2 aria-hidden="true" className="size-4" />
               </button>
             </PopoverTrigger>
-            <PopoverContent className="flex w-[24rem] flex-col overflow-hidden p-0">
+            {/* `--available-height` la pone el posicionador con `fitViewport`; sin
+                heredarla aquí el contenido crecía más que la pantalla y la lista
+                de columnas no hacía scroll: los interruptores de abajo quedaban
+                fuera del alcance (#224). */}
+            <PopoverContent className="flex w-[24rem] max-h-[var(--available-height)] flex-col overflow-hidden p-0">
               <div className="border-b border-border px-5 py-4">
                 <div className="flex items-start justify-between gap-4">
                   <div>
