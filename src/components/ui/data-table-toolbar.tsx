@@ -176,7 +176,12 @@ export function DataTableToolbar<TValue extends DataTableValue>({
           </div>
         ) : null}
         {configurableColumns ? (
-          <Popover positioning={{ placement: "bottom-end" }}>
+          /* Sin enfoque automático al abrir (#224): el panel es más alto que
+              el hueco bajo el botón y el `focus()` del primer control hacía
+              que el navegador desplazara el documento entero para enseñarlo.
+              `fitViewport` acota el panel a la altura disponible y
+              `strategy: "fixed"` lo desacopla del scroll de la página. */
+          <Popover positioning={{ placement: "bottom-end", strategy: "fixed", fitViewport: true, overflowPadding: 8 }} autoFocus={false}>
             <PopoverTrigger>
               <button
                 type="button"
@@ -189,7 +194,7 @@ export function DataTableToolbar<TValue extends DataTableValue>({
                 <Settings2 aria-hidden="true" className="size-4" />
               </button>
             </PopoverTrigger>
-            <PopoverContent className="w-[24rem] p-0">
+            <PopoverContent className="flex w-[24rem] flex-col overflow-hidden p-0">
               <div className="border-b border-border px-5 py-4">
                 <div className="flex items-start justify-between gap-4">
                   <div>
@@ -247,7 +252,7 @@ export function DataTableToolbar<TValue extends DataTableValue>({
                   </button>
                 </div>
               </div>
-              <div className="max-h-80 overflow-y-auto p-2">
+              <div className="min-h-0 flex-1 overflow-y-auto p-2">
                 {table.getAllLeafColumns().filter((column) => {
                   const label = (column.columnDef.meta as { ariaLabel?: string } | undefined)?.ariaLabel ?? column.id;
                   return label.toLocaleLowerCase().includes(columnQuery.trim().toLocaleLowerCase());

@@ -30,6 +30,12 @@ arreglos es un cambio incompatible: subir es seguro.
   desde **1.6.0** (#217). Si ocultabas la navegación en ese rango con un
   breakpoint propio, quítalo: ahora colapsa solo cuando el contenido no cabe.
 
+## [Sin publicar]
+
+### Fixed
+
+- **`DataTable`: abrir «Personalizar tabla» desplazaba toda la página (#224).** El popover enfocaba su primer control al abrir y, como el panel no cabía bajo el botón, el navegador hacía scroll del documento entero —barra lateral incluida— para enseñarlo. Ahora abre sin enfoque automático (`autoFocus={false}`), con posición `fixed` y acotado a la altura disponible (`fitViewport`): la lista de columnas es la que hace scroll por dentro.
+
 ## [1.7.0] - 2026-09-17
 
 ### Added
