@@ -33,7 +33,7 @@ arreglos es un cambio incompatible: subir es seguro.
   desde **1.6.0** (#217). Si ocultabas la navegación en ese rango con un
   breakpoint propio, quítalo: ahora colapsa solo cuando el contenido no cabe.
 
-## [Sin publicar]
+## [1.7.2] - 2026-10-14
 
 ### Fixed
 
