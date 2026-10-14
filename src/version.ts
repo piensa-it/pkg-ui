@@ -13,7 +13,7 @@ export interface LibraryRelease {
 }
 
 /** Versión compilada del paquete. Debe coincidir con `package.json`. */
-export const UI_LIBRARY_VERSION = "1.7.0";
+export const UI_LIBRARY_VERSION = "1.7.1";
 
 /**
  * Notas de migración de la 1.0.0 (#150), ya escritas y listas — pendientes
@@ -39,6 +39,14 @@ export const UI_LIBRARY_RELEASES: readonly LibraryRelease[] = [
   {
     version: UI_LIBRARY_VERSION,
     channel: "current",
+    migration: [
+      "Solo corrige: subir no requiere cambios de código. El panel «Personalizar tabla» de `DataTable` ya no desplaza la página al abrirse y se acota a la altura disponible (#224). Si tu app llevaba un parche propio para sujetar el scroll o limitar ese panel, quitalo.",
+    ],
+  },
+  {
+    version: "1.7.0",
+    channel: "maintenance",
+    publishedAt: "2026-09-17",
     migration: [
       "Todo es aditivo: subir no requiere cambios de código. Suma un componente de marketing (`ProductShowcase`) y pone las dependencias al día.",
       "Carrusel de capturas del producto: para el `aside` del `Hero` de dos columnas (tarjeta acotada con marco, pie que cambia y selector de pantalla) usá `ProductShowcase` con `screens={[{ src, name, description }]}`. Si en tu web pública armaste una isla propia (p. ej. `HeroCarousel`) para esto, reemplazala. No lo confundas con `ImageCarouselBackdrop`, que sigue siendo el fondo a sangre completa de `AuthLayout` (#220).",

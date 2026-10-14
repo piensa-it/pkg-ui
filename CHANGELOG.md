@@ -11,6 +11,9 @@ parche temporal por alguno de estos bugs mientras se corregían aguas arriba,
 sube al menos a la versión indicada y **quita el workaround**. Ninguno de estos
 arreglos es un cambio incompatible: subir es seguro.
 
+- **`DataTable`: abrir «Personalizar tabla» desplazaba toda la página** — desde
+  **1.7.1** (#224). Si sujetabas el scroll o limitabas la altura de ese panel desde tu
+  app, quítalo.
 - **`UiProvider` en SSR / prerender / islas de Astro** — desde **1.4.0** (#183).
   Fallaba con «Missing getServerSnapshot». Ya no hace falta montarlo solo
   después de hidratar: quita ese aplazamiento.
@@ -30,7 +33,7 @@ arreglos es un cambio incompatible: subir es seguro.
   desde **1.6.0** (#217). Si ocultabas la navegación en ese rango con un
   breakpoint propio, quítalo: ahora colapsa solo cuando el contenido no cabe.
 
-## [Sin publicar]
+## [1.7.1] - 2026-10-14
 
 ### Fixed
 
