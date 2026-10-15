@@ -4,6 +4,9 @@ import { cn } from "@/lib/utils";
 
 const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
+    /* `border-raised-border` es el borde de toda superficie elevada, y lleva una
+       pizca de la marca: la mezcla vive en el preset de Tailwind, no aquí. Ver el
+       comentario de `raised.border` en `tailwind-preset.js`. */
     <div ref={ref} className={cn("rounded-lg border border-raised-border bg-raised text-raised-foreground shadow-sm", className)} {...props} />
   ),
 );

@@ -33,6 +33,21 @@ arreglos es un cambio incompatible: subir es seguro.
   desde **1.6.0** (#217). Si ocultabas la navegación en ese rango con un
   breakpoint propio, quítalo: ahora colapsa solo cuando el contenido no cabe.
 
+## [1.8.0] - 2026-10-15
+
+### Changed
+
+- **Toda superficie elevada comparte un borde, y ese borde sigue a la marca.** En una misma pantalla convivían tres bordes para tres superficies que son lo mismo: `Stat` iba con `border-primary/30`, `Card` con `border-raised-border` y `Chart` con marco con `border-border` —el borde de un separador—. Ahora el color de `border-raised-border` se mezcla en el preset: `color-mix(in oklab, hsl(var(--primary)) 18%, hsl(var(--raised-border)))`. Con eso quedan unidos `Card`, `Stat`, `Chart`, el marco de `DataTable` y lo que cada aplicación construya con esa clase, sin tocar ningún componente más.
+  - **Por qué la mezcla y no un token tintado**: `--raised-border` es un valor HSL fijo. Tintarlo ataría el borde a un color concreto y se descolgaría en cuanto la aplicación eligiera otra paleta —Lynx ofrece seis— o en cuanto lo usara otro producto con otra marca. Mezclado contra `--primary`, sigue solo a la marca vigente. Comprobado cambiando de paleta en vivo: el borde se mueve con ella.
+  - El 18 % es lo que une sin pintar: por encima, el borde se lee como un color y compite con el contenido.
+- **`Stat` respira menos y su icono se ve.** El relleno pasa de `p-inset` —calibrado para un contenedor de prosa o un formulario— a `p-inset-compact`: dentro de una cifra hay un rótulo corto, un número y una línea de contexto, y seis de esas en fila con el relleno de un diálogo se leen como un tablero vacío. La tesela del icono pasa de 40 a 48 px y el glifo de 20 a 28 —ocupaba la mitad de su tesela—, y el icono se centra a lo alto en vez de agarrarse al borde superior, que dejaba la esquina de abajo vacía.
+  - El icono sale del `<dl>` y pasa a ser hermano suyo. Es decorativo (`aria-hidden`), así que no le quita nada a quien oye la lista de definiciones.
+  - **Ojo en grillas de alturas desiguales**: centrado, los iconos de una fila solo quedan a la misma altura si las tarjetas miden lo mismo.
+
+### Fixed
+
+- **La densidad `comfortable` no daba más aire a lo denso.** No redefinía `--space-inset-compact`, así que heredaba el de la densidad base: quien elegía «cómoda» lo recibía en las tarjetas pero no en las cifras ni en las pantallas de captura. Ahora sube a `--space-lg`, y la escala queda coherente: 16/12 en compacta, 24/16 por defecto, 32/24 en cómoda.
+
 ## [1.7.3] - 2026-10-14
 
 ### Fixed

@@ -13,7 +13,7 @@ export interface LibraryRelease {
 }
 
 /** Versión compilada del paquete. Debe coincidir con `package.json`. */
-export const UI_LIBRARY_VERSION = "1.7.3";
+export const UI_LIBRARY_VERSION = "1.8.0";
 
 /**
  * Notas de migración de la 1.0.0 (#150), ya escritas y listas — pendientes
@@ -39,6 +39,16 @@ export const UI_LIBRARY_RELEASES: readonly LibraryRelease[] = [
   {
     version: UI_LIBRARY_VERSION,
     channel: "current",
+    migration: [
+      "Cambia cómo se ve, no cómo se usa: subir no requiere tocar código. El borde de toda superficie elevada —Card, Stat, Chart con marco, el marco de DataTable y lo que construyas con `border-raised-border`— lleva ahora una pizca del color de marca de tu app. Se mezcla contra `--primary`, así que sigue solo a la paleta que tengas puesta.",
+      "`Stat` respira menos y su icono se ve: relleno `p-inset-compact` en vez del inset de un contenedor de prosa, tesela de 48 px con glifo de 28 (antes 40 y 20), e icono centrado a lo alto en vez de pegado al borde superior. Si tu grilla de cifras tiene tarjetas de alturas desiguales, los iconos centrados quedarán a distintas alturas: dales la misma altura (`h-full`) o abre una incidencia.",
+      "La densidad `comfortable` ahora sí da más aire a lo denso: `--space-inset-compact` sube a `--space-lg`. Antes heredaba el de la densidad base, así que elegir `comfortable` no cambiaba nada en las cifras ni en las pantallas de captura.",
+    ],
+  },
+  {
+    version: "1.7.3",
+    channel: "maintenance",
+    publishedAt: "2026-10-14",
     migration: [
       "Solo corrige: subir no requiere cambios de código. El Dialog hace scroll dentro de su relleno, con la barra separada de la esquina redondeada; si tu app ponía overflow-y-auto en el diálogo, ya sobra.",
     ],

@@ -101,7 +101,24 @@ const preset = {
         raised: {
           DEFAULT: "hsl(var(--raised))",
           foreground: "hsl(var(--raised-foreground))",
-          border: "hsl(var(--raised-border))",
+          /*
+           * El borde de CUALQUIER superficie elevada: el gris del token con una
+           * pizca de la marca. Se mezcla aquí y no en el token porque el token es
+           * un valor HSL fijo —`272 30% 88%`, por ejemplo— y eso ataría el borde a
+           * un color concreto: se descolgaría en cuanto la aplicación eligiera otra
+           * paleta (Lynx ofrece seis) o en cuanto lo usara otro producto. Mezclado,
+           * sigue solo a `--primary`, que es quien sabe cuál es la marca vigente.
+           *
+           * Y se hace en el token y no en cada componente porque las superficies
+           * elevadas no son tres: son `Card`, `Stat`, `Chart` con marco, el marco de
+           * `DataTable`, y lo que cada aplicación construya con `border-raised-border`
+           * —en Lynx, 40 archivos vía su utilidad `surface-card`—. Tintar componente
+           * por componente deja fuera el siguiente que se escriba.
+           *
+           * 18 % es lo que une sin pintar: por encima el borde se lee como un color
+           * y compite con el contenido.
+           */
+          border: "color-mix(in oklab, hsl(var(--primary)) 18%, hsl(var(--raised-border)))",
         },
         subtle: {
           DEFAULT: "hsl(var(--subtle))",

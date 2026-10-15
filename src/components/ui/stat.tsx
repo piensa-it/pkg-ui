@@ -73,7 +73,7 @@ const TONE: Record<
   StatTone,
   { icon: string; border: string; value: string; announce: string | null }
 > = {
-  default: { icon: "bg-primary/10 text-primary", border: "border-primary/30", value: "text-foreground", announce: null },
+  default: { icon: "bg-primary/10 text-primary", border: "border-raised-border", value: "text-foreground", announce: null },
   positive: { icon: "bg-success/10 text-success", border: "border-success/40", value: "text-foreground", announce: "salió bien" },
   warning: { icon: "bg-warning/10 text-warning", border: "border-warning/50", value: "text-foreground", announce: "requiere atención esta semana" },
   negative: { icon: "bg-destructive/10 text-destructive", border: "border-destructive/40", value: "text-destructive", announce: "requiere acción" },
@@ -116,21 +116,16 @@ export const Stat = React.forwardRef<HTMLDivElement, StatProps>(
         // `@container`: la cifra se mide contra la tarjeta, no contra la
         // ventana. Cuatro tarjetas en una fila estrecha son tarjetas
         // estrechas aunque la ventana sea ancha.
-        className={cn("@container rounded-lg border bg-raised p-inset shadow-raised", styles.border, className)}
+        // `p-inset-compact` y no `p-inset`: el inset genérico está calibrado
+        // para un contenedor de prosa o un formulario. Aquí dentro hay un
+        // rótulo corto, una cifra y una línea de contexto, y seis de estas en
+        // fila con el relleno de un diálogo se leen como un tablero vacío.
+        className={cn("@container flex gap-ui-sm rounded-lg border bg-raised p-inset-compact shadow-raised", styles.border, className)}
         {...props}
       >
-        <dl className="flex min-w-0 flex-col gap-ui-2xs">
-          {/* El icono en una tesela con el tono, en la fila del rótulo, como
-              en `IconTile`: dice de qué es la cifra de un vistazo. Va en esta
-              fila y no flotando sobre la cifra, para que la cifra tenga todo
-              el ancho de la tarjeta. */}
-          <dt id={labelId} className="flex items-start justify-between gap-ui-sm text-ui-body-sm text-muted-foreground">
-            <span className="min-w-0 pt-ui-2xs">{label}</span>
-            {icon ? (
-              <span aria-hidden="true" className={cn("inline-grid size-10 shrink-0 place-items-center rounded-xl [&_svg]:size-5", styles.icon)}>
-                {icon}
-              </span>
-            ) : null}
+        <dl className="flex min-w-0 flex-1 flex-col gap-ui-2xs">
+          <dt id={labelId} className="flex items-start gap-ui-sm text-ui-body-sm text-muted-foreground">
+            <span className="min-w-0">{label}</span>
             {/* El tono se anuncia además de pintarse: el color solo no llega a
                 quien no lo distingue, y con la marca en verde `default` y
                 `positive` salen del mismo color. */}
@@ -160,6 +155,19 @@ export const Stat = React.forwardRef<HTMLDivElement, StatProps>(
             <dd className="text-ui-body-sm text-muted-foreground">{description}</dd>
           ) : null}
         </dl>
+        {/* Fuera del <dl> y centrado a lo alto: dentro de la fila del rótulo se
+            agarraba al borde superior y la esquina de abajo quedaba vacía. Es
+            decorativo (`aria-hidden`), así que sacarlo de la lista de
+            definiciones no le quita nada a quien la oye.
+
+            OJO: centrado, los iconos de una fila solo quedan a la misma altura
+            si las tarjetas miden lo mismo. En una grilla de alturas desiguales
+            saltan, y entonces conviene volverlo a la fila del rótulo. */}
+        {icon ? (
+          <span aria-hidden="true" className={cn("inline-grid size-12 shrink-0 self-center place-items-center rounded-xl [&_svg]:size-7", styles.icon)}>
+            {icon}
+          </span>
+        ) : null}
       </div>
     );
   },

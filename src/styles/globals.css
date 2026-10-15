@@ -151,7 +151,8 @@
 
     /* Relleno interior de un contenedor: tarjeta, diálogo, panel. */
     --space-inset: var(--space-lg);
-    /* El mismo relleno en pantallas de captura, donde caben más filas. */
+    /* Un paso menos, para lo denso: una pantalla de captura donde caben más
+       filas, o un bloque que es una cifra y no prosa (ver `Stat`). */
     --space-inset-compact: var(--space-md);
     /* Ritmo vertical entre bloques de primer nivel de una página. */
     --space-stack: var(--space-lg);
@@ -232,6 +233,10 @@
     --control-default: 2.75rem;
     --control-comfortable: 3rem;
     --space-inset: var(--space-xl);
+    /* Sin esta línea, `comfortable` heredaba el compacto de la densidad base:
+       quien pedía más aire lo recibía en las tarjetas pero no en las cifras ni
+       en las pantallas de captura, que se quedaban igual que en `default`. */
+    --space-inset-compact: var(--space-lg);
     --space-stack: var(--space-xl);
   }
 

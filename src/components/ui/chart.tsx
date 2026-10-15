@@ -315,7 +315,7 @@ function Chart({
   ) : visualization;
 
   return (
-    <section className={framed ? `overflow-hidden rounded-lg border border-border bg-card shadow-sm ${className ?? ""}` : className}>
+    <section className={framed ? `overflow-hidden rounded-lg border border-raised-border bg-card shadow-sm ${className ?? ""}` : className}>
       {title || description || value || trend || actions ? (
         <header className="flex flex-col gap-4 border-b border-border px-5 py-4 sm:flex-row sm:items-start sm:justify-between">
           <div className="min-w-0">
